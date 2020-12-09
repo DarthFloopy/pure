@@ -684,8 +684,8 @@ prompt_pure_state_setup() {
 	hostname='@%F{$prompt_pure_colors[host]}%m%f'
 	username='%F{$prompt_pure_colors[user]}%n%f'"$hostname"
 
-    # Show $SHLVL if > 1
-    [[ $SHLVL -gt 1 ]] && username='[%F{magenta}'$SHLVL'%f] '$username
+	# Show $SHLVL if > 1
+	[[ $SHLVL -gt 1 ]] && username='[%F{magenta}'$SHLVL'%f] '$username
 
 	# Show `(ssh)` if logged in through ssh
 	[[ -n $ssh_connection ]] && username='(%F{cyan}ssh%F{default}) '$username
