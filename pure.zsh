@@ -682,14 +682,15 @@ prompt_pure_state_setup() {
 	fi
 
 	hostname='%F{$prompt_pure_colors[host]}@%m%f'
-	# Show `username@host` if logged in through SSH.
-	[[ -n $ssh_connection ]] && username='%F{$prompt_pure_colors[user]}%n%f'"$hostname"
+	username='%F{$prompt_pure_colors[user]}%n%f'"$hostname"
 
-	# Show `username@host` if inside a container.
-	prompt_pure_is_inside_container && username='%F{$prompt_pure_colors[user]}%n%f'"$hostname"
+    # Show $SHLVL if > 1
+    [[ $SHLVL -gt 1 ]] && username='[%F{magenta}'$SHLVL'%f] '$username
 
-	# Show `username@host` if root, with username in default color.
-	[[ $UID -eq 0 ]] && username='%F{$prompt_pure_colors[user:root]}%n%f'"$hostname"
+	# Show `(ssh)` if logged in through ssh
+	[[ -n $ssh_connection ]] && username='(%F{cyan}ssh%F{default}) '$username
+	# Show `(container)` if logged in through ssh
+	prompt_pure_is_inside_container && username='(%F{cyan}container%F{default}) '$username
 
 	typeset -gA prompt_pure_state
 	prompt_pure_state[version]="1.13.0"
