@@ -681,7 +681,7 @@ prompt_pure_state_setup() {
 		unset MATCH MBEGIN MEND
 	fi
 
-	hostname='%F{$prompt_pure_colors[host]}@%m%f'
+	hostname='@%F{$prompt_pure_colors[host]}%m%f'
 	username='%F{$prompt_pure_colors[user]}%n%f'"$hostname"
 
     # Show $SHLVL if > 1
